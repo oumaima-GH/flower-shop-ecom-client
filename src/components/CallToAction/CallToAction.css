@@ -1,0 +1,27 @@
+.call-to-action {
+    padding: 80px 20px;
+    background-color: #ff7f50;
+    text-align: center;
+    color: #fff;
+  }
+  
+  .call-to-action h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+  }
+  
+  .call-to-action button {
+    background-color: #fff;
+    color: #ff7f50;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .call-to-action button:hover {
+    background-color: #e6e6e6;
+  }
+  

@@ -1,0 +1,45 @@
+.features {
+  display: flex;
+  justify-content: space-around;
+  padding: 50px 20px;
+  background-color: #fff5f5;
+}
+
+.feature {
+  text-align: left;
+  max-width: 250px;
+  position: relative;
+  padding: 15px 20px;
+}
+
+.feature h2 {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  font-weight: 400;
+  color: #000;
+}
+
+.feature p {
+  font-size: .9rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.feature-number {
+  font-size: 1rem;
+  color: #ff6600;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -10px;
+}
+
+.feature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -20px;
+  height: 100%;
+  width: 1px;
+  background-color: #ff6600;
+}

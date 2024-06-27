@@ -10,8 +10,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 50px;
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  transition: background-color 0.3s ease; 
+}
+
+.header.scrolled {
+  background-color: #fff; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 .header .logo {
@@ -23,7 +28,7 @@
 }
 
 .header .logo:hover {
-  color: #e67345;
+  color: #e86c3b;
 }
 
 .header nav {
@@ -45,13 +50,13 @@
 
 .header nav ul li a {
   text-decoration: none;
-  color: #333;
+  color: #ff7f50;
   font-weight: bold;
   font-size: 16px;
 }
 
 .header nav ul li a:hover {
-  color: #ff7f50;
+  color: #e86c3b;
 }
 
 .login-button {

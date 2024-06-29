@@ -30,12 +30,6 @@ const Footer = () => {
             </div>
             <div className="footer-bottom">
                 <p>Copyright © 2024 Flower Shop</p>
-                <div className="footer-social">
-                    <a href="#" className="footer-social-link"><i className="fab fa-twitter"></i></a>
-                    <a href="#" className="footer-social-link"><i className="fab fa-facebook-f"></i></a>
-                    <a href="#" className="footer-social-link"><i className="fab fa-instagram"></i></a>
-                </div>
-                <a href="#" className="back-to-top"><i className="fas fa-arrow-up"></i></a>
             </div>
         </footer>
     );

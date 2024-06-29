@@ -51,7 +51,7 @@
   margin-bottom: 30px;
 }
 
-.hero button {
+.hero .shop-now-button {
   background-color: #ff7f50;
   color: #fff;
   font-weight: 700;
@@ -61,8 +61,9 @@
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 10px;
+  text-decoration: none;
 }
 
-.hero button:hover {
+.hero .shop-now-button:hover {
   background-color: #e67345;
 }

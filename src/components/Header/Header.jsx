@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 function Header() {
@@ -21,16 +22,16 @@ function Header() {
 
   return (
     <header className="header" id="navbar">
-      <a href="#" className='logo'>Flower Shop</a>
+      <Link to="/" className='logo'>Flower Shop</Link>
       <nav>
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#shop">Shop</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/shop">Shop</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
         </ul>
       </nav>
-      <a href="#login" className="login-button">Login</a>
+      <Link to="/login" className="login-button">Login</Link>
     </header>
   );
 }

@@ -11,17 +11,18 @@
     font-family: 'Playfair Display', serif;
   }
   
-  .call-to-action button {
+  .call-to-action .shop-btn {
     background-color: #fff;
     color: #ff7f50;
     border: none;
     padding: 15px 30px;
     font-size: 1rem;
     cursor: pointer;
+    text-decoration: none;
     transition: background-color 0.3s;
   }
   
-  .call-to-action button:hover {
+  .call-to-action .shop-btn:hover {
     background-color: #e6e6e6;
   }
   

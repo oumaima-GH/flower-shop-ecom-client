@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import  {login}  from '../../redux/actions/authAction'
+import { login } from '../../redux/actions/authAction';
 import './LoginPage.css';
 
 const LoginPage = () => {
@@ -12,6 +12,10 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { loading, error, isAuthenticated } = useSelector(state => state.auth);
 
+  useEffect(() => {
+    dispatch({ type: 'RESET_AUTH_STATE' });
+  }, [dispatch]);
+
   const handleSignUpClick = () => {
     navigate('/register');
   };
@@ -19,15 +23,15 @@ const LoginPage = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  // console.log(email, password);
-  const handleSubmit =  (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
-       dispatch(login(email, password));
-      if(isAuthenticated){
+    try {
+      const result = await dispatch(login(email, password));
+      if (result.type === 'LOGIN_SUCCESS') {
         navigate('/');
       }
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
   };

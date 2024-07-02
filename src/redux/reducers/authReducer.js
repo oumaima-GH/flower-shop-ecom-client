@@ -6,6 +6,7 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAILURE,
     LOGOUT,
+    RESET_AUTH_STATE
 } from '../actions/authAction';
 
 const initialState = {
@@ -52,6 +53,17 @@ const authReducer = (state = initialState, action) => {
                 error: null,
                 isAuthenticated: false,
             };
+
+            case RESET_AUTH_STATE:
+            return {
+                ...state,
+                isAuthenticated: false,
+                user: null,
+                token: null,
+                loading: false,
+                error: null
+            };
+    
         default:
             return state;
     }

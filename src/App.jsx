@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from '../src/redux/store';
 import './App.css';
 import About from './components/About/About';
 import BestSelling from './components/BestSelling/BestSelling';
@@ -15,32 +17,34 @@ import Register from './pages/Register/Register';
 
 function App() {
   return (
-    <Router>
-      <div className='App'>
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="*" element={
-            <MainLayout>
-              <Routes>
-                <Route path="/" element={
-                  <>
-                    <Hero />
-                    <Features />
-                    <BestSelling />
-                    <Testimonials />
-                    <CallToAction />
-                  </>
-                } />
-                <Route path="/about" element={<About />} />
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/contact" element={<Contact />} />
-              </Routes>
-            </MainLayout>
-          } />
-        </Routes>
-      </div>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <div className='App'>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="*" element={
+              <MainLayout>
+                <Routes>
+                  <Route path="/" element={
+                    <>
+                      <Hero />
+                      <Features />
+                      <BestSelling />
+                      <Testimonials />
+                      <CallToAction />
+                    </>
+                  } />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/shop" element={<Shop />} />
+                  <Route path="/contact" element={<Contact />} />
+                </Routes>
+              </MainLayout>
+            } />
+          </Routes>
+        </div>
+      </Router>
+    </Provider>
   );
 }
 

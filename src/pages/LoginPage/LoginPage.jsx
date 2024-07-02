@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import  {login}  from '../../redux/actions/authAction'
 import './LoginPage.css';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const { loading, error, isAuthenticated } = useSelector(state => state.auth);
 
   const handleSignUpClick = () => {
     navigate('/register');
@@ -12,6 +18,18 @@ const LoginPage = () => {
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+  // console.log(email, password);
+  const handleSubmit =  (e) => {
+    e.preventDefault();
+    try{
+       dispatch(login(email, password));
+      if(isAuthenticated){
+        navigate('/');
+      }
+    }catch(err){
+      console.log(err);
+    }
   };
 
   return (
@@ -22,10 +40,17 @@ const LoginPage = () => {
         </button>
         <h2>Login to Flower Shop</h2>
         <p>Discover the perfect floral expression for every moment and occasion.</p>
-        <form>
+        {error && <div className="error-message">{error}</div>}
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Email</label>
-            <input type="email" placeholder="your-email@gmail.com" required />
+            <input
+              type="email"
+              placeholder="your-email@gmail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </div>
           <div className="form-group">
             <label>Password</label>
@@ -33,6 +58,8 @@ const LoginPage = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Your Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
               <button
@@ -50,7 +77,9 @@ const LoginPage = () => {
             </label>
             <a href="#">Forgot Password</a>
           </div>
-          <button type="submit" className='submit'>Log In</button>
+          <button type="submit" className='submit' disabled={loading}>
+            {loading ? 'Logging in...' : 'Log In'}
+          </button>
         </form>
         <div className="signup-link">
           <p>Don't have an account? <span onClick={handleSignUpClick} className="signup-text">Sign Up</span></p>

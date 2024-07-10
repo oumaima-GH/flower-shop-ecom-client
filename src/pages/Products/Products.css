@@ -1,0 +1,43 @@
+.form-group input, .form-group select{
+    padding: 12px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+}
+
+.form-group select{
+    margin-bottom: 20px;
+}
+
+
+.price-stock-categ{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+
+}
+.submit-button{
+    max-width: 150px;
+    height: 40px;
+    border-radius: 50px;
+    font-weight: 500;
+    
+}
+
+@media (min-width: 768px) {
+    .price-stock-categ {
+        grid-template-columns: repeat(3, 1fr); /* Three columns on tablets and larger */
+    }
+}
+
+@media (max-width: 767px) {
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%; /* Full width for mobile */
+        margin-bottom: 10px; /* Adjust margin for mobile */
+    }
+
+    .price-stock-categ {
+        grid-template-columns: 1fr; /* Single column for mobile */
+    }
+}

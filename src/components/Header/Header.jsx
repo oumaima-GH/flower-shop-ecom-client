@@ -15,7 +15,6 @@ function Header() {
     navigate('/login');
   };
 
-
   useEffect(() => {
     const handleScroll = () => {
       const header = document.getElementById('navbar');
@@ -34,16 +33,26 @@ function Header() {
   }, []);
 
   return (
-   <header className="header" id="navbar">
-      <Link to="/" className='logo'>Flower Shop</Link>
+    <header className="header" id="navbar">
+      <Link to="/" className="logo">Flower Shop</Link>
       <nav>
         <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/shop">Shop</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
+          {!isAuthenticated && (
+            <>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/about">About</Link></li>
+              <li><Link to="/shop">Shop</Link></li>
+              <li><Link to="/contact">Contact</Link></li>
+            </>
+          )}
           {isAuthenticated && userRole === 'Seller' && (
-            <li><Link to="/products">Products</Link></li>
+            <>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/about">About</Link></li>
+            <li><Link to="/shop">Shop</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/dashboard">Dashboard</Link></li>
+            </>
           )}
         </ul>
       </nav>
@@ -57,4 +66,3 @@ function Header() {
 }
 
 export default Header;
-

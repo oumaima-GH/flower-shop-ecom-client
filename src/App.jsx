@@ -14,7 +14,8 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import Testimonials from './components/Tesimonials/Testimonials';
 import MainLayout from './components/Layout';
 import Register from './pages/Register/Register';
-// import Products from './pages/Products/Products';
+import Dashboard from './pages/Dashboard/Dashboard';
+import Products from './pages/Products/Product';
 
 function App() {
   return (
@@ -39,7 +40,8 @@ function App() {
                   <Route path="/about" element={<About />} />
                   <Route path="/shop" element={<Shop />} />
                   <Route path="/contact" element={<Contact />} />
-                  {/* <Route path="/products" element={<Products />} /> */}
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/products" element={<Products />} />
                 </Routes>
               </MainLayout>
             } />

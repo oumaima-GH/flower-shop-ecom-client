@@ -76,16 +76,25 @@ const Products = () => {
         navigate('/dashboard');
     };
 
+    const handleSignOut = () => {
+        localStorage.removeItem('token');
+        navigate('/login'); 
+    };
+
+    const navigateToCategories = () => {
+        navigate('/categories');
+    };
+
     return (
         <div className="dashboard">
             <aside className="sidebar">
                 <h2 className='dashboard-title' onClick={navigateToDashboard}>Dashboard</h2>
                 <nav>
                     <ul>
-                        <li>Products</li>
-                        <li>Categories</li>
+                        <li onClick={() => navigate('/products')}>Products</li>
+                        <li onClick={navigateToCategories}>Categories</li>
                         <li>Profile</li>
-                        <li>Sign Out</li>
+                        <li onClick={handleSignOut}>Sign Out</li>
                     </ul>
                 </nav>
             </aside>

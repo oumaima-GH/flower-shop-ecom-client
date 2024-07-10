@@ -24,6 +24,10 @@ const Dashboard = () => {
         navigate('/dashboard');
     };
 
+    const navigateToCategories = () => {
+        navigate('/categories');
+    };
+
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -99,7 +103,7 @@ const Dashboard = () => {
                 <nav>
                     <ul>
                         <li onClick={handleAddProduct}>Products</li>
-                        <li>Categories</li>
+                        <li onClick={navigateToCategories}>Categories</li>
                         <li>Profile</li>
                         { isAuthenticated && <li onClick={handleLogout}>Sign Out</li> }
                     </ul>

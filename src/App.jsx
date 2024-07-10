@@ -16,6 +16,7 @@ import MainLayout from './components/Layout';
 import Register from './pages/Register/Register';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Products from './pages/Products/Product';
+import Category from './pages/Categories/Category';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/products" element={<Products />} />
+                  <Route path="/categories" element={<Category />} />
                 </Routes>
               </MainLayout>
             } />

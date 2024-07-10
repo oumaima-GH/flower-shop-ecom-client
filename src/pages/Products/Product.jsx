@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Products.css';
 
-// Mapping of category names to their corresponding IDs
 const categoryMapping = {
     'Flower': 1,
     'Rose': 2,
@@ -14,7 +13,7 @@ const Products = () => {
         name: '',
         price: '',
         stock: '',
-        categoryId: '',
+        categoryId: '', 
         description: '',
         image: null
     });
@@ -28,31 +27,39 @@ const Products = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
-        const formDataForApi = new FormData();
-
-        Object.keys(formData).forEach(key => {
-            if (key === 'categoryId') {
-                const categoryId = categoryMapping[formData[key]];
-                formDataForApi.append('categoryId', categoryId);
-            } else {
-                formDataForApi.append(key, formData[key]);
-            }
-        });
-
         try {
             const token = localStorage.getItem('token');
+
+            const categoryId = categoryMapping[formData.categoryId];
+            formData.categoryId = categoryId;
+
+            console.log('Form data:', formData);
+
+            if (!formData.name || !formData.price || !formData.stock || !formData.categoryId || !formData.description || !formData.image) {
+                throw new Error('Please provide all required fields');
+            }
+
+            const body = {
+                name: formData.name,
+                price: formData.price,
+                stock: formData.stock,
+                categoryId: formData.categoryId,
+                description: formData.description,
+                image: formData.image 
+            };
 
             const response = await fetch('/api/products', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
                 },
-                body: formDataForApi
+                body: JSON.stringify(body)
             });
 
             if (!response.ok) {
                 const errorResponse = await response.json();
-                console.error('Server response:', errorResponse);
+                console.error('Server response error:', errorResponse);
                 throw new Error('Network response was not ok');
             }
 

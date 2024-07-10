@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../redux/actions/authAction';
 import './Dashboard.css';
 
 const Dashboard = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+    const userRole = useSelector(state => state.auth.role);
     const [products, setProducts] = useState([]);
 
     const handleAddProduct = () => {
         navigate('/products');
+    };
+
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate('/login');
     };
 
     const navigateToDashboard = () => {
@@ -18,7 +28,6 @@ const Dashboard = () => {
         const fetchProducts = async () => {
             try {
                 const token = localStorage.getItem('token');
-                // console.log('Token:', token);
 
                 if (!token) {
                     throw new Error('Token is missing');
@@ -30,14 +39,11 @@ const Dashboard = () => {
                     },
                 });
 
-                // console.log('Response:', response);
-
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
 
                 const result = await response.json();
-                // console.log('Result:', result);
 
                 if (result.status === 'success' && Array.isArray(result.data)) {
                     setProducts(result.data);
@@ -86,7 +92,6 @@ const Dashboard = () => {
         }
     };
 
-
     return (
         <div className="dashboard">
             <aside className="sidebar">
@@ -96,7 +101,7 @@ const Dashboard = () => {
                         <li onClick={handleAddProduct}>Products</li>
                         <li>Categories</li>
                         <li>Profile</li>
-                        <li>Sign Out</li>
+                        { isAuthenticated && <li onClick={handleLogout}>Sign Out</li> }
                     </ul>
                 </nav>
             </aside>
@@ -128,7 +133,7 @@ const Dashboard = () => {
                             <span className='prod-desc'>{product.description}</span>
                             <span className='prod-price'>${product.price}</span>
                             <span className='prod-stock'>{product.stock}</span>
-                            <span className='prod-categ'>{product.category.name}</span>
+                            <span className='prod-categ'>{product.category.id}</span>
                             <div>
                                 <button>Edit</button>
                                 <button onClick={() => handleDeleteProduct(product.id)}>Delete</button>

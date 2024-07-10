@@ -52,6 +52,41 @@ const Dashboard = () => {
         fetchProducts();
     }, []);
 
+    const handleDeleteProduct = async (productId) => {
+        const isConfirmed = window.confirm('Are you sure you want to delete this product?');
+        if (!isConfirmed) {
+            return;
+        }
+
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                throw new Error('Token is missing');
+            }
+
+            const response = await fetch(`/api/products/${productId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const result = await response.json();
+            if (result.status === 'success') {
+                setProducts(products.filter(product => product.id !== productId));
+            } else {
+                console.error('Failed to delete the product:', result.message);
+            }
+        } catch (error) {
+            console.error('Error deleting product:', error);
+        }
+    };
+
+
     return (
         <div className="dashboard">
             <aside className="sidebar">
@@ -96,7 +131,7 @@ const Dashboard = () => {
                             <span className='prod-categ'>{product.category.name}</span>
                             <div>
                                 <button>Edit</button>
-                                <button>Delete</button>
+                                <button onClick={() => handleDeleteProduct(product.id)}>Delete</button>
                             </div>
                         </li>
                     ))}

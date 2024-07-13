@@ -122,28 +122,32 @@ const Dashboard = () => {
                 </div>
                 <ul className="product-list">
                     <li className="product-list-header">
-                        <span>Image</span>
-                        <span>Product Name</span>
-                        <span>Description</span>
+                        {/* <span>Image</span> */}
+                        <span>Product</span>
+                        {/* <span>Description</span> */}
                         <span>Price</span>
                         <span>Stock</span>
                         <span>Category</span>
                         <span>Actions</span>
                     </li>
-                    {Array.isArray(products) && products.map(product => (
-                        <li key={product.id}>
-                            <span className='prod-image'>{product.image}</span>
-                            <span className='prod-name'>{product.name}</span>
-                            <span className='prod-desc'>{product.description}</span>
-                            <span className='prod-price'>${product.price}</span>
-                            <span className='prod-stock'>{product.stock}</span>
-                            <span className='prod-categ'>{product.category.id}</span>
-                            <div>
-                                <button>Edit</button>
-                                <button onClick={() => handleDeleteProduct(product.id)}>Delete</button>
-                            </div>
-                        </li>
-                    ))}
+                    
+                {Array.isArray(products) && products.map(product => (
+                    <li key={product.id}>
+                     {/* <span className='prod-image'> */}
+                       {/* <img src={`/uploads/${product.image}`} alt={product.name} className="product-image"/> */}
+                     {/* </span> */}
+                     <span className='prod prod-name'>{product.name}</span>
+                     {/* <span className='prod-desc'>{product.description}</span> */}
+                     <span className='prod'>${product.price}</span>
+                     <span className='prod'>{product.stock}</span>
+                     <span className='prod'>{product.category.name}</span>
+                  <div>
+                     <button>Edit</button>
+                     <button onClick={() => handleDeleteProduct(product.id)}>Delete</button>
+                 </div>
+                </li>
+))}
+
                 </ul>
             </div>
         </div>

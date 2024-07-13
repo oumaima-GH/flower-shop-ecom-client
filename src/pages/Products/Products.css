@@ -22,6 +22,13 @@
     font-weight: 500;
     
 }
+.success-message {
+    background-color: #fff;
+    color: #4CAF50;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
 
 @media (min-width: 768px) {
     .price-stock-categ {

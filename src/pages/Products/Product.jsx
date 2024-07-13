@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import './Products.css';
 
 const categoryMapping = {
-    'Flower': 1,
-    'Rose': 2,
+    'Flower': 4,
+    'Rose': 5,
 };
 
 const Products = () => {
@@ -17,6 +17,7 @@ const Products = () => {
         description: '',
         image: null
     });
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleInputChange = (e) => {
         const { name, value, type, files } = e.target;
@@ -26,51 +27,52 @@ const Products = () => {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-
+    
         try {
             const token = localStorage.getItem('token');
-
-            const categoryId = categoryMapping[formData.categoryId];
-            formData.categoryId = categoryId;
-
-            console.log('Form data:', formData);
-
-            if (!formData.name || !formData.price || !formData.stock || !formData.categoryId || !formData.description || !formData.image) {
-                throw new Error('Please provide all required fields');
-            }
-
-            const body = {
-                name: formData.name,
-                price: formData.price,
-                stock: formData.stock,
-                categoryId: formData.categoryId,
-                description: formData.description,
-                image: formData.image 
-            };
-
+            const formDataToSend = new FormData();
+    
+            formDataToSend.append('name', formData.name);
+            formDataToSend.append('price', parseFloat(formData.price));
+            formDataToSend.append('stock', parseInt(formData.stock, 10));
+            formDataToSend.append('categoryId', parseInt(categoryMapping[formData.categoryId], 10));
+            formDataToSend.append('description', formData.description);
+            formDataToSend.append('image', formData.image); 
+    
             const response = await fetch('/api/products', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
+                    'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(body)
+                body: formDataToSend
             });
-
+    
             if (!response.ok) {
                 const errorResponse = await response.json();
                 console.error('Server response error:', errorResponse);
                 throw new Error('Network response was not ok');
             }
-
+    
             const result = await response.json();
             console.log('Product added successfully:', result);
-
-            navigate('/dashboard');
+            setSuccessMessage('Product added successfully!');
+            setFormData({
+                name: '',
+                price: '',
+                stock: '',
+                categoryId: '', 
+                description: '',
+                image: null
+            });
+            setTimeout(() => {
+                setSuccessMessage('');
+                navigate('/dashboard');
+            }, 1000); 
         } catch (error) {
             console.error('Error adding product:', error);
         }
     };
+    
 
     const navigateToDashboard = () => {
         navigate('/dashboard');
@@ -100,7 +102,8 @@ const Products = () => {
             </aside>
             <div className="main-content">
                 <h2 className='add-product-title'>Add Product</h2>
-                <form className="add-product-form" onSubmit={handleFormSubmit} encType="multipart/form-data">
+                <form className="add-product-form" method="POST" onSubmit={handleFormSubmit} encType="multipart/form-data">
+                    {successMessage && <p className="success-message">{successMessage}</p>}
                     <div className="form-group">
                         <label>Product Name</label>
                         <input 

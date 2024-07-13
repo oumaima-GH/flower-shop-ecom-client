@@ -48,6 +48,13 @@
   margin: 0 15px;
 }
 
+.cart-icon {
+  color: #e86c3b;
+  font-size: 1.2rem;
+  margin-left: 30px; 
+  cursor: pointer;
+}
+
 .header nav ul li a {
   text-decoration: none;
   color: #ff7f50;

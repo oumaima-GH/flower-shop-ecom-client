@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/actions/authAction';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+
 import './Header.css';
 
 function Header() {
@@ -45,22 +48,25 @@ function Header() {
               <li><Link to="/contact">Contact</Link></li>
             </>
           )}
-          {isAuthenticated && userRole === 'Seller' && (
+          {isAuthenticated && (
             <>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/shop">Shop</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
-            <li><Link to="/dashboard">Dashboard</Link></li>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/about">About</Link></li>
+              <li><Link to="/shop">Shop</Link></li>
+              <li><Link to="/contact">Contact</Link></li>
+              {userRole === 'Seller' && (
+                <li><Link to="/dashboard">Dashboard</Link></li>
+              )}
             </>
           )}
         </ul>
       </nav>
       {!isAuthenticated ? (
-        <Link to="/login" className="logout-button">Login</Link>
+        <Link to="/login" className="login-button">Login</Link>
       ) : (
-        <button className="login-button" onClick={handleLogout}>Logout</button>
+        <button className="logout-button" onClick={handleLogout}>Logout</button>
       )}
+      <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" />
     </header>
   );
 }

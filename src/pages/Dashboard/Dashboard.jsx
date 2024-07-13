@@ -10,6 +10,10 @@ const Dashboard = () => {
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const userRole = useSelector(state => state.auth.role);
     const [products, setProducts] = useState([]);
+    const [categoryFilter, setCategoryFilter] = useState('All Products'); // Default to show all products
+    const [searchTerm, setSearchTerm] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 3; // Products per page
 
     const handleAddProduct = () => {
         navigate('/products');
@@ -96,6 +100,36 @@ const Dashboard = () => {
         }
     };
 
+    // Filter products based on category and search term
+    const filteredProducts = products.filter(product => {
+        const matchesCategory = categoryFilter === 'All Products' || product.category.name === categoryFilter;
+        const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesCategory && matchesSearch;
+    });
+
+    // Pagination logic
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+    // Pagination control functions
+    const nextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const prevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const goToPage = (page) => {
+        setCurrentPage(page);
+    };
+
     return (
         <div className="dashboard">
             <aside className="sidebar">
@@ -112,43 +146,58 @@ const Dashboard = () => {
             <div className="main-content">
                 <h2 className='list-product-title'>List of Products</h2>
                 <div className="filters">
-                    <input type="text" placeholder="Search Item..." />
-                    <select>
-                        <option>All Products</option>
-                        <option>Flower</option>
-                        <option>Rose</option>
+                    <input
+                        type="text"
+                        placeholder="Search Item..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    <select
+                        value={categoryFilter}
+                        onChange={(e) => setCategoryFilter(e.target.value)}
+                    >
+                        <option value="All Products">All Products</option>
+                        <option value="Flower">Flower</option>
+                        <option value="Rose">Rose</option>
+                        {/* Add more options based on available categories */}
                     </select>
                     <button className="add-product-button" onClick={handleAddProduct}>Add</button>
                 </div>
                 <ul className="product-list">
                     <li className="product-list-header">
-                        {/* <span>Image</span> */}
                         <span>Product</span>
-                        {/* <span>Description</span> */}
                         <span>Price</span>
                         <span>Stock</span>
                         <span>Category</span>
                         <span>Actions</span>
                     </li>
-                    
-                {Array.isArray(products) && products.map(product => (
-                    <li key={product.id}>
-                     {/* <span className='prod-image'> */}
-                       {/* <img src={`/uploads/${product.image}`} alt={product.name} className="product-image"/> */}
-                     {/* </span> */}
-                     <span className='prod prod-name'>{product.name}</span>
-                     {/* <span className='prod-desc'>{product.description}</span> */}
-                     <span className='prod'>${product.price}</span>
-                     <span className='prod'>{product.stock}</span>
-                     <span className='prod'>{product.category.name}</span>
-                  <div>
-                     <button>Edit</button>
-                     <button onClick={() => handleDeleteProduct(product.id)}>Delete</button>
-                 </div>
-                </li>
-))}
-
+                    {currentProducts.map(product => (
+                        <li key={product.id}>
+                            <span className='prod prod-name'>{product.name}</span>
+                            <span className='prod'>${product.price.toFixed(2)}</span>
+                            <span className='prod'>{product.stock}</span>
+                            <span className='prod'>{product.category.name}</span>
+                            <div>
+                                <button>Edit</button>
+                                <button onClick={() => handleDeleteProduct(product.id)}>Delete</button>
+                            </div>
+                        </li>
+                    ))}
                 </ul>
+                {/* Pagination controls */}
+                <div className="pagination">
+                    <button onClick={prevPage} disabled={currentPage === 1} className="pagination-btn">
+                        Prev
+                    </button>
+                    {Array.from({ length: totalPages }, (_, index) => (
+                        <button key={index + 1} onClick={() => goToPage(index + 1)} className={`pagination-btn ${currentPage === index + 1 ? 'active' : ''}`}>
+                            {index + 1}
+                        </button>
+                    ))}
+                    <button onClick={nextPage} disabled={currentPage === totalPages} className="pagination-btn">
+                        Next
+                    </button>
+                </div>
             </div>
         </div>
     );

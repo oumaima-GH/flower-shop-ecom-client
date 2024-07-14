@@ -27,7 +27,7 @@
   }
   
   .best-selling__product {
-    /* background: #fff; */
+    background: #fff;
     border: 1px solid #eee;
     border-radius: 10px;
     overflow: hidden;

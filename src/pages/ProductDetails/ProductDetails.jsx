@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'; 
+import BestSelling from '../../components/BestSelling/BestSelling';
 import './ProductDetails.css';
 
 const ProductDetails = () => {
@@ -62,6 +63,7 @@ const ProductDetails = () => {
   const categories = Array.isArray(product.category) ? product.category.map(cat => cat.name) : [product.category.name];
 
   return (
+    <>
     <div className="product-details-container">
       <div className="prod-details">
         <div className="prod-images">
@@ -102,6 +104,8 @@ const ProductDetails = () => {
         </div>
       </div>
     </div>
+          <BestSelling />
+</>
   );
 };
 

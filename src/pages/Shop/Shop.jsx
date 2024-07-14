@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BestSelling from '../../components/BestSelling/BestSelling';
 import './Shop.css';
 
 function Shop() {
@@ -50,6 +51,7 @@ function Shop() {
   };
 
   return (
+    <>
     <section className="shop">
       <h1>Shop</h1>
       <p>Showing all {products.length} results</p>
@@ -71,6 +73,8 @@ function Shop() {
         ))}
       </div>
     </section>
+    <BestSelling />
+    </>
   );
 }
 

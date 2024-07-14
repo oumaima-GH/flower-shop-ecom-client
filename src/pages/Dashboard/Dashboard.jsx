@@ -10,10 +10,10 @@ const Dashboard = () => {
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const userRole = useSelector(state => state.auth.role);
     const [products, setProducts] = useState([]);
-    const [categoryFilter, setCategoryFilter] = useState('All Products'); // Default to show all products
+    const [categoryFilter, setCategoryFilter] = useState('All Products'); 
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 3; // Products per page
+    const productsPerPage = 3; 
 
     const handleAddProduct = () => {
         navigate('/products');
@@ -30,6 +30,10 @@ const Dashboard = () => {
 
     const navigateToCategories = () => {
         navigate('/categories');
+    };
+
+    const navigateToShop = () => {
+        navigate('/shop');
     };
 
     useEffect(() => {
@@ -100,20 +104,17 @@ const Dashboard = () => {
         }
     };
 
-    // Filter products based on category and search term
     const filteredProducts = products.filter(product => {
         const matchesCategory = categoryFilter === 'All Products' || product.category.name === categoryFilter;
         const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
         return matchesCategory && matchesSearch;
     });
 
-    // Pagination logic
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
-    // Pagination control functions
     const nextPage = () => {
         if (currentPage < totalPages) {
             setCurrentPage(currentPage + 1);
@@ -138,6 +139,8 @@ const Dashboard = () => {
                     <ul>
                         <li onClick={handleAddProduct}>Products</li>
                         <li onClick={navigateToCategories}>Categories</li>
+                        <li>Orders</li>
+                        <li onClick={navigateToShop}>My Shop</li>
                         <li>Profile</li>
                         { isAuthenticated && <li onClick={handleLogout}>Sign Out</li> }
                     </ul>
@@ -159,7 +162,6 @@ const Dashboard = () => {
                         <option value="All Products">All Products</option>
                         <option value="Flower">Flower</option>
                         <option value="Rose">Rose</option>
-                        {/* Add more options based on available categories */}
                     </select>
                     <button className="add-product-button" onClick={handleAddProduct}>Add</button>
                 </div>
@@ -184,7 +186,6 @@ const Dashboard = () => {
                         </li>
                     ))}
                 </ul>
-                {/* Pagination controls */}
                 <div className="pagination">
                     <button onClick={prevPage} disabled={currentPage === 1} className="pagination-btn">
                         Prev

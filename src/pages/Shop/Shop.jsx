@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Shop.css';
 
 function Shop() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -43,6 +45,10 @@ function Shop() {
     );
   }
 
+  const handleViewDetails = (productId) => {
+    navigate(`/product/${productId}`);
+  };
+
   return (
     <section className="shop">
       <h1>Shop</h1>
@@ -59,7 +65,7 @@ function Shop() {
               <div className="product-pricing">
                 <span className="original-price">${product.price.toFixed(2)}</span>
               </div>
-              <button className='buy-btn'>Add To Cart</button>
+              <button className='buy-btn' onClick={() => handleViewDetails(product.id)}>View Details</button>
             </div>
           </div>
         ))}

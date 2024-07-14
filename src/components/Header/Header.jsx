@@ -48,15 +48,17 @@ function Header() {
               <li><Link to="/contact">Contact</Link></li>
             </>
           )}
-          {isAuthenticated && (
+          {isAuthenticated && userRole === 'Customer' && (
             <>
               <li><Link to="/">Home</Link></li>
               <li><Link to="/about">About</Link></li>
               <li><Link to="/shop">Shop</Link></li>
               <li><Link to="/contact">Contact</Link></li>
-              {userRole === 'Seller' && (
-                <li><Link to="/dashboard">Dashboard</Link></li>
-              )}
+            </>
+          )}
+          {isAuthenticated && userRole === 'Seller' && (
+            <>
+              <li><Link to="/dashboard">Dashboard</Link></li>
             </>
           )}
         </ul>
@@ -66,7 +68,9 @@ function Header() {
       ) : (
         <button className="logout-button" onClick={handleLogout}>Logout</button>
       )}
-      <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" />
+      {isAuthenticated && userRole === 'Customer' && (
+        <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" />
+      )}
     </header>
   );
 }

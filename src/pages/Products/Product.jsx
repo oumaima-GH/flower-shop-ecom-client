@@ -55,6 +55,11 @@ const Products = () => {
     
             const result = await response.json();
             console.log('Product added successfully:', result);
+
+            if (result.data && result.data.image) {
+                result.data.image = result.data.image.replace(/\\/g, '/');
+            }
+
             setSuccessMessage('Product added successfully!');
             setFormData({
                 name: '',

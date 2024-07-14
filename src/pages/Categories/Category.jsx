@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { logout } from '../../redux/actions/authAction';
+import { useDispatch, useSelector } from 'react-redux';
 import './Category.css';
 
 const categoryMapping = {
@@ -8,9 +10,11 @@ const categoryMapping = {
 };
 
 const Category = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
     const [newCategory, setNewCategory] = useState('');
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const [editing, setEditing] = useState(false);
     const [currentCategory, setCurrentCategory] = useState({});
     const [token, setToken] = useState('');
@@ -23,6 +27,11 @@ const Category = () => {
 
         fetchToken();
     }, []);
+
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate('/login');
+    };
 
     useEffect(() => {
         if (token) {
@@ -123,6 +132,10 @@ const Category = () => {
         navigate('/dashboard');
     };
 
+    const navigateToShop = () => {
+        navigate('/shop');
+    };
+
     return (
         <div className="dashboard">
             <aside className="sidebar">
@@ -131,8 +144,10 @@ const Category = () => {
                     <ul>
                         <li onClick={() => navigate('/products')}>Products</li>
                         <li>Categories</li>
+                        <li>Orders</li>
+                        <li onClick={navigateToShop}>My Shop</li>
                         <li>Profile</li>
-                        <li>Sign Out</li>
+                        <li onClick={handleLogout}>Sign Out</li>
                     </ul>
                 </nav>
             </aside>

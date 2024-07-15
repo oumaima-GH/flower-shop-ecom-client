@@ -59,6 +59,7 @@ function Shop() {
         {products.map(product => (
           <div className="product-card" key={product.id}>
             <div className="product-image">
+              {console.log(product.image)}
               <img src={product.image} alt={product.name} />
             </div>
             <div className="product-details">

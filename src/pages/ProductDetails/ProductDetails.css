@@ -13,7 +13,7 @@
 
 .prod-images {
   flex: 1;
-  margin-bottom: 20px; 
+  margin-bottom: 10px; 
 }
 
 .main-image {
@@ -67,7 +67,7 @@
 
 .additional-info p {
   font-size: 15px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   color: #5b5b5b;
   font-weight: 600;
 }
@@ -91,7 +91,7 @@
 hr {
   border: 1px solid #e6e6e6;
   margin-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .payment-icons img {
@@ -163,6 +163,7 @@ hr {
     justify-content: center;
     align-items: flex-start;
   }
+
 
   .prod-details {
     max-width: 800px; 

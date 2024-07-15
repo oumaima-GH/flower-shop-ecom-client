@@ -27,18 +27,18 @@ const Products = () => {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-    
+
         try {
             const token = localStorage.getItem('token');
             const formDataToSend = new FormData();
-    
+
             formDataToSend.append('name', formData.name);
-            formDataToSend.append('price', parseFloat(formData.price));
-            formDataToSend.append('stock', parseInt(formData.stock, 10));
-            formDataToSend.append('categoryId', parseInt(categoryMapping[formData.categoryId], 10));
+            formDataToSend.append('price', formData.price);
+            formDataToSend.append('stock', formData.stock);
+            formDataToSend.append('categoryId', categoryMapping[formData.categoryId]);
             formDataToSend.append('description', formData.description);
-            formDataToSend.append('image', formData.image); 
-    
+            formDataToSend.append('image', formData.image);
+
             const response = await fetch('/api/products', {
                 method: 'POST',
                 headers: {
@@ -46,19 +46,15 @@ const Products = () => {
                 },
                 body: formDataToSend
             });
-    
+
             if (!response.ok) {
                 const errorResponse = await response.json();
                 console.error('Server response error:', errorResponse);
-                throw new Error('Network response was not ok');
+                throw new Error(errorResponse.message || 'Network response was not ok');
             }
-    
+
             const result = await response.json();
             console.log('Product added successfully:', result);
-
-            if (result.data && result.data.image) {
-                result.data.image = result.data.image.replace(/\\/g, '/');
-            }
 
             setSuccessMessage('Product added successfully!');
             setFormData({
@@ -77,7 +73,6 @@ const Products = () => {
             console.error('Error adding product:', error);
         }
     };
-    
 
     const navigateToDashboard = () => {
         navigate('/dashboard');
@@ -92,6 +87,14 @@ const Products = () => {
         navigate('/categories');
     };
 
+    const navigateToOrders = () => {
+        navigate('/orders');
+    };
+
+    const navigateToShop = () => {
+        navigate('/shop');
+    };
+
     return (
         <div className="dashboard">
             <aside className="sidebar">
@@ -100,6 +103,8 @@ const Products = () => {
                     <ul>
                         <li onClick={() => navigate('/products')}>Products</li>
                         <li onClick={navigateToCategories}>Categories</li>
+                        <li onClick={navigateToOrders}>Orders</li>
+                        <li onClick={navigateToShop}>My Shop</li>
                         <li>Profile</li>
                         <li onClick={handleSignOut}>Sign Out</li>
                     </ul>
@@ -117,6 +122,7 @@ const Products = () => {
                             placeholder="Enter product name" 
                             value={formData.name} 
                             onChange={handleInputChange} 
+                            required
                         />
                     </div>
                     <div className="form-group">
@@ -125,6 +131,7 @@ const Products = () => {
                             type="file" 
                             name="image"
                             onChange={handleInputChange} 
+                            required
                         />
                     </div>
                     <div className="form-group">
@@ -134,6 +141,7 @@ const Products = () => {
                             placeholder="Enter product description" 
                             value={formData.description} 
                             onChange={handleInputChange} 
+                            required
                         />
                     </div>
                     <div className="form-group price-stock-categ">
@@ -144,6 +152,7 @@ const Products = () => {
                             placeholder="Enter price" 
                             value={formData.price} 
                             onChange={handleInputChange} 
+                            required
                         />
                     </div>
                     <div className="form-group price-stock-categ">
@@ -154,6 +163,7 @@ const Products = () => {
                             placeholder="Enter stock quantity" 
                             value={formData.stock} 
                             onChange={handleInputChange} 
+                            required
                         />
                     </div>
                     <div className="form-group price-stock-categ">
@@ -162,6 +172,7 @@ const Products = () => {
                             name="categoryId" 
                             value={formData.categoryId} 
                             onChange={handleInputChange}
+                            required
                         >
                             <option value="">Select category</option>
                             <option value="Flower">Flower</option>

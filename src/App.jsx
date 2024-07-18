@@ -18,6 +18,7 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import Products from './pages/Products/Product';
 import Category from './pages/Categories/Category';
 import ProductDetails from './pages/ProductDetails/ProductDetails';
+import ViewCart from './pages/ViewCart/ViewCart';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
                   <Route path="/products" element={<Products />} />
                   <Route path="/categories" element={<Category />} />
                   <Route path="/product/:productId" element={<ProductDetails />} />
+                  <Route path="/viewcart" element={<ViewCart />} />
                 </Routes>
               </MainLayout>
             } />

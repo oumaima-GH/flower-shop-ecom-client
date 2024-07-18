@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 .product-details-container {
-  padding: 40px;
+  padding: 30px;
   margin: 50px;
 }
 
@@ -31,19 +31,18 @@
 .prod-info h1 {
   font-size: 24px;
   font-family: 'playfair display', serif;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   color: #e60000;
 }
 
 .prod-category {
   font-size: 16px;
-  margin-bottom: 10px;
   color: #555555;
 }
 
 .prod-price {
   font-size: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   font-weight: 600;
   color: #333;
 }
@@ -56,13 +55,13 @@
 
 .prod-description {
   font-size: 16px;
-  margin-bottom: 40px;
+  margin-bottom: 22px;
   color: #4f4f4f;
   font-weight: 500;
 }
 
 .additional-info {
-  margin-bottom: 50px;
+  margin-bottom: 15px;
 }
 
 .additional-info p {

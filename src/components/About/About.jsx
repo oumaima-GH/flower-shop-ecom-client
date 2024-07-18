@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './About.css';
 
 function About() {
@@ -24,7 +25,8 @@ function About() {
           <p>
             Welcome to Florist, where floral artistry meets passion for nature's beauty. Our story is rooted in a deep love for flowers and a commitment to creating unforgettable moments for our customers.
           </p>
-          <button className="read-more-button">Shop Now</button>
+          <Link to={'/shop'} className="read-more-button">Shop Now</Link>
+
         </div>
       </div>
     </section>

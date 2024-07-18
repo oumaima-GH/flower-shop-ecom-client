@@ -1,136 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
 body {
-    margin: 0;
+  margin: 0;
 }
 
 .login-container {
-    display: flex;
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
+  display: flex;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-color: #f7f7f7;
+
 }
 
 .back {
-    padding: 10px;
-    background: transparent;
-    color: #ff5722;
-    cursor: pointer;
-    font-size: 12px;
-    display: flex;
-    align-items: flex-start;
-    position: absolute;
-    top: 100px;
-    left: 30px;
-
- 
+  padding: 10px;
+  background: transparent;
+  color: #ff5722;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 20px;
+  left: 20px;
 }
 
 .back i {
-    margin-right: 5px;
-    
+  margin-right: 5px;
 }
 
 .back:hover {
-    background: transparent;
-    color: #333;
+  background: transparent;
+  color: #333;
 }
 
 .login-form {
-    flex: 1;
-    background-color: #f7f7f7;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
-    overflow-y: auto;
+  flex: 1;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  overflow-y: auto;
+  max-width: 360px; 
+  margin: auto; 
 }
 
 .login-form h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
 .login-form p {
-    font-size: 14px;
-    color: #6c757d;
-    margin-bottom: 20px;
-    text-align: center;
+  font-size: 14px;
+  color: #6c757d;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .login-form form {
-    width: 100%;
-    max-width: 300px;
+  width: 100%;
 }
 
 .form-group {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 5px;
+  display: block;
+  margin-bottom: 5px;
 }
 
 .form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.password-input {
+  position: relative;
+}
+
+.password-input input {
+  padding-right: 40px; 
+}
+
+.password-input .show-password-btn {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-10%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 12px;
+  color: #007bff;
 }
 
 .form-options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .form-options label {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .form-options input {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .form-options a {
-    color: #007bff;
-    text-decoration: none;
+  color: #007bff;
+  text-decoration: none;
 }
 
 .form-options a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .submit {
-    width: 100%;
-    padding: 10px;
-    background-color: #ff7043;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
+  width: 100%;
+  padding: 10px;
+  background-color: #ff7043;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .submit:hover {
-    background-color: #ff5722;
+  background-color: #ff5722;
 }
 
 .login-image {
-    flex: 1;
-    overflow-y: auto;
-    background: url('https://images.pexels.com/photos/1601505/pexels-photo-1601505.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
+  flex: 1;
+  background: url('https://images.pexels.com/photos/1601505/pexels-photo-1601505.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
+  display: none; 
 }
 
+.signup-link {
+  margin-top: 20px;
+  text-align: center;
+}
 
 .signup-text {
-    color: #007bff;
-    cursor: pointer;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.signup-text:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .login-container {
+    flex-direction: row-reverse;
   }
-  
-  .signup-text:hover {
-    text-decoration: underline;
+
+  .login-form {
+    flex: 1;
+    order: 2;
+    padding: 40px;
+    max-width: 400px; 
+    margin: auto; 
   }
-  
+
+  .login-image {
+    flex: 1;
+    display: block; 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; 
+    max-width: calc(50% - 100px);
+  }
+
+}

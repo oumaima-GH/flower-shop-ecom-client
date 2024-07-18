@@ -1,17 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
-
 .footer {
     background-color: #fff5f5;
-    padding: 12px 80px;
+    padding: 12px 20px; 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr; 
     grid-gap: 20px;
+}
 
+@media (min-width: 768px) {
+    .footer {
+        grid-template-columns: repeat(3, 1fr); 
+        padding: 12px 80px; 
+    }
 }
 
 .footer-section {
-    margin: 50px;
+    margin: 0 20px; 
+    text-align: center; 
 }
 
 .footer-title {
@@ -19,19 +25,19 @@
     margin-bottom: 10px;
     font-weight: 500;
     font-family: 'Playfair Display', serif;
-
 }
 
 .footer-description {
     font-size: 1em;
     line-height: 1.5;
     color: #616161;
+    text-align: center;
 }
-
 
 .footer-links {
     list-style-type: none;
     padding: 0;
+    text-align: center; 
 }
 
 .footer-link-item {
@@ -48,14 +54,10 @@
 }
 
 .footer-bottom {
-   color: #616161;
+    color: #616161;
     width: 100%;
     margin-top: 20px;
     border-top: 1px solid #eaeaea;
     padding-top: 10px;
+    text-align: center; 
 }
-
-
-
-
-

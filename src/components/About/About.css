@@ -89,9 +89,10 @@
     color: #fff;
     background-color: #FF8368;
     border: none;
-    border-radius: 4px;
+    border-radius: 7px;
     cursor: pointer;
     text-decoration: none;
+    max-width: 150px;
     transition: background-color 0.3s ease;
   }
   
@@ -113,6 +114,7 @@
     .about-content {
       text-align: center;
     }
+    
   }
   
   .story {
@@ -120,7 +122,7 @@
     justify-content: center;
     align-items: center;
     padding: 50px;
-    background-color: #2e0909; /* Dark brown background */
+    background-color: #2e0909; 
     color: #fff;
   }
   
@@ -130,7 +132,7 @@
   }
   
   .story-content h2 {
-    color: #ff4500; /* Orange color for subheading */
+    color: #ff4500; 
     margin-bottom: 20px;
   }
   
@@ -157,4 +159,6 @@
     max-width: 100%;
     height: auto;
   }
+
+  
   
